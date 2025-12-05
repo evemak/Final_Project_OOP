@@ -24,22 +24,11 @@ public class Inventory {
         this.quantity = quantity;
     }
 
-    public void increaseStock(int amount) {
-        quantity += amount;
-    }
-
+    // used for when customer orders
     public void decreaseStock(int amount) {
         if (quantity >= amount) {
             quantity -= amount;
         }
-    }
-
-    public boolean isInStock() {
-        return quantity > 0;
-    }
-
-    public boolean isSoldOut() {
-        return quantity == 0;
     }
 
     @Override

@@ -25,26 +25,6 @@ public class Menu {
         return null;
     }
 
-    // Mark item as sold out (unavailable)
-    public boolean markItemAsSoldOut(String itemName) {
-        MenuItem item = findItemByName(itemName);
-        if (item != null) {
-            item.setAvailable(false);
-            return true;
-        }
-        return false;
-    }
-
-    // Mark item as available
-    public boolean markItemAsAvailable(String itemName) {
-        MenuItem item = findItemByName(itemName);
-        if (item != null) {
-            item.setAvailable(true);
-            return true;
-        }
-        return false;
-    }
-
     // Remove item from menu
     public boolean removeItem(String itemName) {
         MenuItem item = findItemByName(itemName);
