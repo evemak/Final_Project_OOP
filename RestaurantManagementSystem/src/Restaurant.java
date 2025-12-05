@@ -2,50 +2,52 @@ import java.util.ArrayList;
 
 public class Restaurant {
     private String name;
-    private Menu menu;                     // Has-A Menu
-    private Inventory inventory;           // Has-A Inventory
-    private ArrayList<String> reviews;     // List of customer reviews
+    private Menu menu;
+    private ArrayList<Inventory> inventoryList;
+    private ArrayList<String> reviews;
 
-    // Constructor
-    public Restaurant(String name, Menu menu, Inventory inventory) {
+    public Restaurant(String name, Menu menu) {
         this.name = name;
         this.menu = menu;
-        this.inventory = inventory;
+        this.inventoryList = new ArrayList<>();
         this.reviews = new ArrayList<>();
     }
 
-    // Getters
-    public String getName() {
-        return name;
+    public void addInventory(Inventory inv) {
+        inventoryList.add(inv);
     }
 
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public Inventory getInventory() {
-        return inventory;
-    }
-
-    public ArrayList<String> getReviews() {
-        return reviews;
-    }
-
-    // Add a review
     public void addReview(String review) {
         reviews.add(review);
     }
 
-    // Staff operations
-    public void addItemToMenu(MenuItem item) {
-        menu.addItem(item);
+    // Getters 
+    public String getName() { 
+        return name; 
+    } 
+    
+    public Menu getMenu() { 
+        return menu; 
+    } 
+    
+    public ArrayList<Inventory> getInventory() { 
+        return inventoryList; 
+    
+    } public ArrayList<String> getReviews() { 
+        return reviews; 
     }
 
-    public void updateInventory(MenuItem item, int quantity) {
-        inventory.updateQuantity(item, quantity);
+    // Update specific item's inventory
+    public void updateInventory(MenuItem item, int amount) {
+        for (Inventory inv : inventoryList) {
+            if (inv.getItem().equals(item)) {
+                inv.setQuantity(amount);
+                return;
+            }
+        }
     }
 
     public Bill generateBill(Customer customer) {
-        return new Bill(customer.getOrderItems());
+        return new Bill(customer); 
     }
 }
