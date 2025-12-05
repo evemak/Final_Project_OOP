@@ -34,6 +34,14 @@ public class Inventory {
         }
     }
 
+    public boolean isInStock() {
+        return quantity > 0;
+    }
+
+    public boolean isSoldOut() {
+        return quantity == 0;
+    }
+
     @Override
     public String toString() {
         return item.getName() + " - Quantity: " + quantity;

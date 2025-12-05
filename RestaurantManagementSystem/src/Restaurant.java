@@ -47,6 +47,15 @@ public class Restaurant {
         }
     }
 
+    public Inventory findInventoryByItem(MenuItem item) {
+    for (Inventory inv : inventoryList) {
+        if (inv.getItem().getName().equalsIgnoreCase(item.getName())) {
+            return inv;
+        }
+    }
+    return null; 
+}
+
     public Bill generateBill(Customer customer) {
         return new Bill(customer); 
     }
