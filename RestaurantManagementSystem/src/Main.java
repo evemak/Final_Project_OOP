@@ -11,7 +11,7 @@ public class Main {
 
         // Actor selection 
         while (true){
-            System.out.println("Are you a (C)ustomer or (S)taff? Enter 'C' for Customer and 'S' for Staff");
+            System.out.println("Are you a (C)ustomer or (S)taff? Enter 'X' to exit the program.");
             String role = scanner.nextLine().trim().toUpperCase();
     
             // Staff actions
@@ -261,7 +261,13 @@ public class Main {
                 continue;
     
     
-            } else {
+            } 
+
+            else if (role.equals("X")) {
+                break;
+            }
+            
+            else {
                 System.out.println("Invalid role. Please enter 'C' for Customer or 'S' for Staff.");
             }
             scanner.close();
