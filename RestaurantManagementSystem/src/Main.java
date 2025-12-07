@@ -26,7 +26,7 @@ public class Main {
                     System.out.println("3. Update inventory quantity");
                     System.out.println("4. Serve order");
                     System.out.println("5. Generate bill");
-                    System.out.println("6. Exit");
+                    System.out.println("6. Switch role");
                     System.out.print("\nChoose an option: ");
                     
                     String choice = scanner.nextLine().trim();
@@ -151,7 +151,7 @@ public class Main {
                     System.out.println("2. Place order");
                     System.out.println("3. View current bill");
                     System.out.println("4. Leave a review");
-                    System.out.println("5. Exit");
+                    System.out.println("5. Switch role");
                     System.out.print("\nChoose an option: ");
     
                     String choice = scanner.nextLine().trim();
