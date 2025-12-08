@@ -164,7 +164,7 @@ public class Main {
                     System.out.println("\nCUSTOMER ACTIONS MENU");
                     System.out.println("1. View menu");
                     System.out.println("2. Place order");
-                    System.out.println("3. View current bill");
+                    System.out.println("3. Receive bill");
                     System.out.println("4. Cancel order");
                     System.out.println("5. Leave a review");
                     System.out.println("6. Switch role");
@@ -245,7 +245,7 @@ public class Main {
     
                         // View current bill
                         case "3":
-                            System.out.println("\n~~~CURRENT BILL~~~");
+                            System.out.println("\n~~~VIEWING BILL~~~");
                             if (bill.getItems().isEmpty()) {
                                 System.out.println("No items ordered yet.");
                             } else {

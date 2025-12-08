@@ -6,7 +6,7 @@ public class Restaurant {
     private Menu menu;
     private ArrayList<Inventory> inventoryList;
     private ArrayList<String> reviews;
-    private HashMap<Integer, Bill> customerBills; // Track customer bills by customer ID
+    private HashMap<Integer, Bill> customerBills; 
 
     public Restaurant(String name, Menu menu) {
         this.name = name;
