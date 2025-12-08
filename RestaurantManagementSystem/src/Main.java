@@ -102,8 +102,20 @@ public class Main {
                         // Serve order
                         case "4":
                             System.out.println("\n~~~SERVING ORDER~~~");
-                            System.out.println("Order has been prepared and served to the customer!");
-                            System.out.println("~~~ORDER SERVED SUCCESSFULLY~~~");
+                            System.out.print("Enter customer ID: ");
+                            int serveCustomerId = Integer.parseInt(scanner.nextLine());
+                            Bill serveBill = restaurant.findBillByCustomerId(serveCustomerId);
+                            
+                            if (serveBill == null) {
+                                System.out.println("No order found for customer ID: " + serveCustomerId);
+                            } else if (serveBill.getStatus() == Bill.OrderStatus.CANCELLED) {
+                                System.out.println("This order has been cancelled and cannot be served.");
+                            } else {
+                                serveBill.setStatus(Bill.OrderStatus.SERVED);
+                                System.out.println("Order has been prepared and served to the customer!");
+                                System.out.println("Order Status: " + serveBill.getStatus());
+                                System.out.println("~~~ORDER SERVED SUCCESSFULLY~~~");
+                            }
                             break;
                             
                         // Generate bill
@@ -153,8 +165,9 @@ public class Main {
                     System.out.println("1. View menu");
                     System.out.println("2. Place order");
                     System.out.println("3. View current bill");
-                    System.out.println("4. Leave a review");
-                    System.out.println("5. Switch role");
+                    System.out.println("4. Cancel order");
+                    System.out.println("5. Leave a review");
+                    System.out.println("6. Switch role");
                     System.out.print("\nChoose an option: ");
     
                     String choice = scanner.nextLine().trim();
@@ -236,6 +249,7 @@ public class Main {
                             if (bill.getItems().isEmpty()) {
                                 System.out.println("No items ordered yet.");
                             } else {
+                                System.out.println("Order Status: " + bill.getStatus());
                                 for (MenuItem item : bill.getItems()) {
                                     System.out.println("  - " + item.getName() + ": $" + item.getPrice());
                                 }
@@ -243,8 +257,22 @@ public class Main {
                             }
                             break;
     
-                        // Leave a review
+                        // Cancel order
                         case "4":
+                            System.out.println("\n~~~CANCEL ORDER~~~");
+                            if (bill.getItems().isEmpty()) {
+                                System.out.println("No order to cancel.");
+                            } else if (bill.cancelOrder()) {
+                                System.out.println("Order cancelled successfully.");
+                                System.out.println("Order Status: " + bill.getStatus());
+                            } else {
+                                System.out.println("Cannot cancel order. Order has already been served.");
+                                System.out.println("Current Status: " + bill.getStatus());
+                            }
+                            break;
+    
+                        // Leave a review
+                        case "5":
                             System.out.print("\nPlease leave your review: ");
                             String review = scanner.nextLine();
                             restaurant.addReview(review);
@@ -252,7 +280,7 @@ public class Main {
                             break;
     
                         // Exit program
-                        case "5":
+                        case "6":
                             System.out.println("~~~EXITED CUSTOMER MENU~~~");
                             customerRunning = false;
                             break;
