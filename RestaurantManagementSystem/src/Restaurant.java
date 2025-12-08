@@ -1,16 +1,19 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Restaurant {
     private String name;
     private Menu menu;
     private ArrayList<Inventory> inventoryList;
     private ArrayList<String> reviews;
+    private HashMap<Integer, Bill> customerBills; // Track customer bills by customer ID
 
     public Restaurant(String name, Menu menu) {
         this.name = name;
         this.menu = menu;
         this.inventoryList = new ArrayList<>();
         this.reviews = new ArrayList<>();
+        this.customerBills = new HashMap<>();
     }
 
     public void addInventory(Inventory inv) {
@@ -58,5 +61,15 @@ public class Restaurant {
 
     public Bill generateBill(Customer customer) {
         return new Bill(customer); 
+    }
+
+    // Register a customer's bill
+    public void registerCustomerBill(int customerId, Bill bill) {
+        customerBills.put(customerId, bill);
+    }
+
+    // Find a bill by customer ID
+    public Bill findBillByCustomerId(int customerId) {
+        return customerBills.get(customerId);
     }
 }

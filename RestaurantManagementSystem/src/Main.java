@@ -110,15 +110,17 @@ public class Main {
                         case "5":
                             System.out.print("Enter customer ID: ");
                             int customerId = Integer.parseInt(scanner.nextLine());
+                            Bill bill = restaurant.findBillByCustomerId(customerId);
                             
-                            Customer customer = new Customer(customerId);
-                            Bill bill = restaurant.generateBill(customer);
-                            
-                            System.out.println("\n~~~BILL GENERATED~~~");
-                            System.out.println(bill);
-                            System.out.println("Items:");
-                            for (MenuItem item : bill.getItems()) {
-                                System.out.println("  - " + item.getName() + ": $" + item.getPrice());
+                            if (bill == null) {
+                                System.out.println("No bill found for customer ID: " + customerId);
+                            } else {
+                                System.out.println("\n~~~BILL GENERATED~~~");
+                                System.out.println(bill);
+                                System.out.println("Items:");
+                                for (MenuItem item : bill.getItems()) {
+                                    System.out.println("  - " + item.getName() + ": $" + item.getPrice());
+                                }
                             }
                             break;
                             
@@ -143,6 +145,7 @@ public class Main {
     
                 Customer customer = new Customer(customerId);
                 Bill bill = new Bill(customer);
+                restaurant.registerCustomerBill(customerId, bill);
     
                 boolean customerRunning = true;
                 while (customerRunning) {
