@@ -155,9 +155,18 @@ public class Main {
                 System.out.print("Please enter your customer ID: ");
                 int customerId = Integer.parseInt(scanner.nextLine());
     
-                Customer customer = new Customer(customerId);
-                Bill bill = new Bill(customer);
-                restaurant.registerCustomerBill(customerId, bill);
+                // Check if customer already has a bill
+                Bill bill = restaurant.findBillByCustomerId(customerId);
+                if (bill == null) {
+                    // New customer - create new bill
+                    Customer customer = new Customer(customerId);
+                    bill = new Bill(customer);
+                    restaurant.registerCustomerBill(customerId, bill);
+                    System.out.println("Welcome new customer!");
+                } else {
+                    // Existing customer - use existing bill
+                    System.out.println("Welcome back! Your order status: " + bill.getStatus());
+                }
     
                 boolean customerRunning = true;
                 while (customerRunning) {
